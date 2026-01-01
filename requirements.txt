@@ -1,0 +1,16 @@
+scikit-learn==1.5.2
+pandas==2.2.3
+numpy==2.1.2
+
+mlflow==2.17.0
+dvc==3.55.2
+zenml==0.67.0
+optuna==4.0.0
+
+fastapi==0.115.4
+uvicorn==0.32.0
+python-multipart==0.0.12  # Pour tester l'API avec JSON
+
+joblib==1.4.2
+matplotlib==3.9.2        # Pour éventuelles figures dans MLflow
+seaborn==0.13.2          # Optionnel, pour de jolies visualisations
