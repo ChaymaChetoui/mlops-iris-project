@@ -44,9 +44,7 @@ def train_model(
         model = LogisticRegression(C=C, max_iter=200)
     else:
         model = SVC(C=C)
-    
     model.fit(X_train, y_train)
-    
     os.makedirs("artifacts", exist_ok=True)
     model_path = "artifacts/zenml_model.pkl"
     joblib.dump(model, model_path)

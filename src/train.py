@@ -77,7 +77,7 @@ with mlflow.start_run(run_name=f"{model_name}_C={args.C}"):
 
     # Confusion matrix
     cm = confusion_matrix(y_test, y_pred)
-    plt.figure(figsize=(6,5))
+    plt.figure(figsize=(6, 5))
     sns.heatmap(cm, annot=True, fmt="d", cmap="Blues",
                 xticklabels=df["target_name"].unique(),
                 yticklabels=df["target_name"].unique())

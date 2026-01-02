@@ -18,6 +18,7 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
 
+
 def objective(trial):
     model_type = trial.suggest_categorical("model_type", ["logistic", "svm"])
 
@@ -32,6 +33,7 @@ def objective(trial):
 
     score = cross_val_score(model, X_train, y_train, cv=5, scoring="accuracy").mean()
     return score
+
 
 # Callback corrigé : create_child=True au lieu de nested=True
 mlflow_callback = MLflowCallback(
@@ -68,6 +70,7 @@ with mlflow.start_run(run_name="optuna_best_model_final"):
     mlflow.sklearn.log_model(best_model, "final_best_model")
     os.makedirs("../artifacts", exist_ok=True)
     joblib.dump(best_model, "artifacts/optuna_best_model_final.pkl")
+
 
 print(f"Accuracy test final : {test_accuracy:.4f}")
 print("Étude terminée ! Relance mlflow ui → tu verras le run parent + 10 child runs dépliables.")
