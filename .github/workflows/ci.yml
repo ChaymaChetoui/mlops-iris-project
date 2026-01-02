@@ -26,7 +26,7 @@ jobs:
       - name: Run tests
         run: pytest tests/ -v
 
-    build-docker:
+  build-docker:
     needs: lint-and-test
     runs-on: ubuntu-latest
     steps:
