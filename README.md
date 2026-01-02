@@ -28,3 +28,4 @@ mlops-iris-project/
 ```bash
 git clone https://gitlab.com/ton-username/mlops-iris-project.git
 cd mlops-iris-project"trigger CI" 
+"Trigger final CI/CD run" 
