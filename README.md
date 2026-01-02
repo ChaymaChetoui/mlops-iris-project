@@ -27,4 +27,4 @@ mlops-iris-project/
 1. Cloner le repo
 ```bash
 git clone https://gitlab.com/ton-username/mlops-iris-project.git
-cd mlops-iris-project
+cd mlops-iris-project"trigger CI" 
