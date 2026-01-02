@@ -26,7 +26,7 @@ jobs:
       - name: Run tests
         run: pytest tests/ -v
 
-  build-docker:
+    build-docker:
     needs: lint-and-test
     runs-on: ubuntu-latest
     steps:
@@ -39,7 +39,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push Docker image
         run: |
-          IMAGE_NAME=ghcr.io/${{ github.repository }}:latest
+          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/mlops-iris-project:latest
           docker build -t $IMAGE_NAME .
           docker push $IMAGE_NAME
 
