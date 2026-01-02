@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_VERSION=v1  # Par défaut v1, on changera pour v2
+    volumes:
+      - ./artifacts:/app/artifacts  # Pour faciliter le switch v1/v2 sans rebuild
