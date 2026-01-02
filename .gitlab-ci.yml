@@ -1,0 +1,58 @@
+stages:
+  - lint
+  - test
+  - build
+  - smoke_test
+
+variables:
+  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
+
+lint:
+  stage: lint
+  image: python:3.10-slim
+  script:
+    - pip install flake8
+    - flake8 src/ --max-line-length=120 --ignore=E501,W503
+  allow_failure: false
+
+test:
+  stage: test
+  image: python:3.10-slim
+  needs: ["lint"]
+  script:
+    - pip install -r requirements.txt
+    - dvc pull  # Récupère les données
+    - python -m pytest tests/ -v
+  artifacts:
+    paths:
+      - artifacts/
+
+build:
+  stage: build
+  image: docker:stable
+  services:
+    - docker:dind
+  variables:
+    DOCKER_TLS_CERTDIR: ""
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker build -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
+  only:
+    - dev
+    - main
+    - tags
+
+# Bonus CT : job planifié (smoke test rapide)
+smoke_test:
+  stage: smoke_test
+  image: python:3.10-slim
+  script:
+    - pip install -r requirements.txt
+    - dvc pull
+    # Entraînement rapide avec petit subset pour vérifier que tout marche
+    - python -c "from sklearn.datasets import load_iris; from sklearn.linear_model import LogisticRegression; from sklearn.model_selection import train_test_split; iris=load_iris(); X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.2); model=LogisticRegression(max_iter=10); model.fit(X_train, y_train); acc=model.score(X_test, y_test); print('Smoke test accuracy:', acc); assert acc > 0.5"
+  when: manual  # Ou "schedule" si tu configures un schedule dans GitLab
+  only:
+    - schedules
