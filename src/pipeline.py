@@ -1,3 +1,4 @@
+import os
 from zenml import pipeline, step
 from typing import Annotated, Tuple
 import pandas as pd
@@ -6,13 +7,14 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
 import joblib
-import os
+
 
 @step
 def load_data() -> pd.DataFrame:
     """Charge le dataset Iris."""
     df = pd.read_csv("data/iris.csv")
     return df
+
 
 @step
 def split_data(df: pd.DataFrame) -> Tuple[
@@ -28,6 +30,7 @@ def split_data(df: pd.DataFrame) -> Tuple[
         X, y, test_size=0.2, random_state=42, stratify=y
     )
     return X_train, X_test, y_train, y_test
+
 
 @step
 def train_model(
@@ -49,6 +52,7 @@ def train_model(
     joblib.dump(model, model_path)
     return model_path
 
+
 @step
 def evaluate_model(
     model_path: str,
@@ -62,12 +66,14 @@ def evaluate_model(
     print(f"Accuracy du pipeline ZenML : {accuracy:.4f}")
     return accuracy
 
+
 @pipeline
 def iris_pipeline(model_type: str = "logistic", C: float = 1.0):
     df = load_data()
     X_train, X_test, y_train, y_test = split_data(df=df)
     model_path = train_model(X_train=X_train, y_train=y_train, model_type=model_type, C=C)
     evaluate_model(model_path=model_path, X_test=X_test, y_test=y_test)
+
 
 if __name__ == "__main__":
     print("=== Run Baseline LogisticRegression ===")

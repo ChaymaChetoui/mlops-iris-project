@@ -1,6 +1,6 @@
 from sklearn.datasets import load_iris
 import pandas as pd
-
+import os
 # Charger le dataset Iris intégré à scikit-learn
 iris = load_iris()
 
@@ -10,7 +10,7 @@ df['target'] = iris.target
 df['target_name'] = df['target'].apply(lambda x: iris.target_names[x])
 
 # Créer le dossier data s'il n'existe pas
-import os
+
 os.makedirs("../data", exist_ok=True)
 
 # Sauvegarder en CSV
