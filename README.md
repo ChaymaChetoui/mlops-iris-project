@@ -116,7 +116,7 @@ Accédez à http://localhost:8237 pour visualiser :
 
 ![ZenML Pipeline](docs/screenshots/zenml.png)
 ![ZenML Pipeline](docs/screenshots/zen.png)
-![ZenML Pipeline](docs/screenshots/capture zen.png)
+![ZenML Pipeline](docs/screenshots/capturezen.png)
 *Pipeline ZenML avec les différentes étapes et artefacts*
 
 Les artefacts sont automatiquement sauvegardés dans `artifacts/`.
@@ -178,9 +178,6 @@ curl -X POST http://localhost:8000/predict \
   -d '{"features": [6.7, 3.0, 5.2, 2.3]}'
 ```
 
-![API Response](docs/screenshots/api-prediction.png)
-*Exemple de réponse de l'API avec prédiction*
-
 ### Gestion des versions de modèle
 
 Pour changer de version, modifiez `MODEL_VERSION` dans `docker-compose.yml` :
@@ -216,7 +213,7 @@ Le workflow `.github/workflows/ci.yml` s'exécute automatiquement à chaque push
 4. **Push Registry** : Publication sur GitHub Container Registry (`ghcr.io`)
 5. **Smoke test** : Validation quotidienne automatique
 
-![GitHub Actions](docs/screenshots/github-actions.png)
+![GitHub Actions](docs/screenshots/cicd.png)
 *Workflow CI/CD avec tous les jobs réussis*
 
 Consultez l'onglet [Actions](https://github.com/ChaymaChetoui/mlops-iris-project/actions) pour voir l'historique des builds.
