@@ -47,7 +47,7 @@ mlops-iris-project/
 
 ### Prérequis
 
-- Python 3.8+
+- Python 3.10
 - Docker & Docker Compose
 - Git & DVC
 
@@ -96,6 +96,11 @@ Accédez à http://localhost:5000 pour voir :
 - ✅ Étude Optuna (10 trials avec child runs)
 - ✅ Meilleur modèle (SVM, accuracy: 1.0)
 
+![MLflow UI](docs/screenshots/mlFlowcapture.png)
+![MLflow UI](docs/screenshots/mlFlowcapture2.png)
+![MLflow UI](docs/screenshots/mlflowcaptur3.png)
+*Interface MLflow montrant l'historique des expériences et les métriques*
+
 ### Pipeline ZenML
 
 Exécutez le pipeline complet de ML :
@@ -108,6 +113,11 @@ zenml up --blocking
 Accédez à http://localhost:8237 pour visualiser :
 
 **DAG du pipeline** : `load_data` → `split_data` → `train_model` → `evaluate_model`
+
+![ZenML Pipeline](docs/screenshots/zenml.png)
+![ZenML Pipeline](docs/screenshots/zen.png)
+![ZenML Pipeline](docs/screenshots/capture zen.png)
+*Pipeline ZenML avec les différentes étapes et artefacts*
 
 Les artefacts sont automatiquement sauvegardés dans `artifacts/`.
 
@@ -124,6 +134,9 @@ Cette étude :
 - Logs tous les trials dans MLflow (parent + child runs)
 - Sauvegarde automatiquement le meilleur modèle
 
+![Optuna Study](docs/screenshots/optuna.png)
+*Résultats de l'optimisation Optuna avec les meilleurs hyperparamètres*
+
 ## 🌐 Déploiement de l'API
 
 ### Lancer l'API avec Docker Compose
@@ -133,6 +146,11 @@ docker-compose up --build
 ```
 
 L'API est accessible sur http://localhost:8000
+
+![API FastAPI](docs/screenshots/resultat.png)
+![API FastAPI](docs/screenshots/res2.png)
+
+
 
 ### Tester les prédictions
 
@@ -159,6 +177,9 @@ curl -X POST http://localhost:8000/predict \
   -H "Content-Type: application/json" \
   -d '{"features": [6.7, 3.0, 5.2, 2.3]}'
 ```
+
+![API Response](docs/screenshots/api-prediction.png)
+*Exemple de réponse de l'API avec prédiction*
 
 ### Gestion des versions de modèle
 
@@ -194,6 +215,9 @@ Le workflow `.github/workflows/ci.yml` s'exécute automatiquement à chaque push
 3. **Build Docker** : Construction de l'image
 4. **Push Registry** : Publication sur GitHub Container Registry (`ghcr.io`)
 5. **Smoke test** : Validation quotidienne automatique
+
+![GitHub Actions](docs/screenshots/github-actions.png)
+*Workflow CI/CD avec tous les jobs réussis*
 
 Consultez l'onglet [Actions](https://github.com/ChaymaChetoui/mlops-iris-project/actions) pour voir l'historique des builds.
 
