@@ -200,6 +200,28 @@ docker-compose up --build
 1. ✅ Déploiement initial avec v1
 2. ✅ Migration vers v2 (meilleur modèle)
 3. ✅ Rollback vers v1 (si nécessaire)
+## 🌐 Déploiement live avec interface web interactive
+
+Le projet est déployé en live sur AWS EC2 avec une interface Gradio interactive permettant de tester les prédictions en temps réel.
+
+### URL fixe pour tester l'interface (Elastic IP)
+**Interface Gradio live :**  
+http://34.193.10.232:7860/
+
+**Instructions pour tester :**
+1. Ouvrez le lien ci-dessus dans votre navigateur
+2. Déplacez les curseurs pour entrer les mesures de la fleur Iris
+3. Cliquez sur **Submit**
+4. Vous verrez la prédiction instantanée (setosa, versicolor ou virginica) 🌸
+
+**Exemples rapides à tester :**
+- Setosa : [5.1, 3.5, 1.4, 0.2]
+- Versicolor : [6.4, 3.2, 4.5, 1.5]
+- Virginica : [7.7, 3.8, 6.7, 2.2]
+
+**Note :**  
+L'URL est fixe grâce à une Elastic IP AWS. L'instance doit être en cours d'exécution et `python app.py` lancé sur le serveur pour que l'interface soit accessible.
+
 
 ## 🔄 CI/CD avec GitHub Actions
 
